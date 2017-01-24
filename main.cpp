@@ -1,3 +1,16 @@
+/*
+ Knight's tour without recursion, giving practice with the stack
+ Given an initial position, make a chess knight visit every tile in a board only once
+ Use basic knight's tour heuristic (visit the tile with the least amount of entry points) for the first 32 moves
+ -following this, turn off the heuristic and find each move exhaustively
+ -use backtracking with the stack to make corrections when you go down the wrong path
+
+ In order to get the starting points for the knight, prompt the user and store their desired positions in a singly linked list
+ you should not have to ask for how many positions they'll be inputting, so amount is unknown
+
+ save everything in an output file
+ */
+
 #include <iostream>
 
 //display the board (similar to in my final last semester)
