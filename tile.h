@@ -1,5 +1,5 @@
-tom#ifndef "tile_h"
-#define "tile_h"
+//#ifndef "TILE_H"
+//#define "TILE_H"
 
 class Tile
 {
@@ -9,9 +9,8 @@ class Tile
     int value; //number value of the tile
     int heur; //heuristic value of the tile
 
-    int findHeur(int x, int y); //computes heuristic value
-
   public:
+    void findHeur(int x, int y); //computes heuristic value
 
     //setters
     void setYLoc(int y);
@@ -27,4 +26,4 @@ class Tile
     Tile(int x, int y); //overloaded with x and y location
 
 }; //end Tile class
-#endif
+//#endif

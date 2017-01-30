@@ -1,17 +1,17 @@
 #include "tile.h"
 
 //setters
-Tile :: setYLoc(int y)
+void Tile :: setYLoc(int y)
 {
   Tile :: yLoc = y;
 } //end setter
 
-Tile :: setXLoc(int x)
+void Tile :: setXLoc(int x)
 {
   Tile :: xLoc = x;
 } //end setter
 
-Tile :: setValue(int val)
+void Tile :: setValue(int val)
 {
   Tile :: value = val;
 } //end setter
@@ -28,33 +28,39 @@ int Tile :: getHeur()
 } //end getter
 
 //find the heuristic value given x and y coordinates
-Tile :: findHeur(int x, int y)
+void Tile :: findHeur(int x, int y)
 {
   int rtn = 0;
-  heur = 0; //would this be done
+  heur = 0; //would this be done already?
 
-  if ((x < 2) || (x > 6))
+  if ((x < 2) || (x > 5))
   {
-    heur++;
+    rtn++;
   } //end if
 
-  if ((y < 2) || (y > 6))
+  if ((y < 2) || (y > 5))
   {
-    heur++;
+    rtn++;
   } //end if
 
   if ((x == 0) || (x == 7))
   {
-    heur++;
+    rtn++;
   } //end if
 
   if ((y == 0) || (y == 7))
   {
-    heur++;
+    rtn++;
   } //end if
+/*
+  if ((x == 1) || (x == 6) || (y == 1) || (y == 6))
+  {
+    rtn++;
+  } //end if
+*/
 
-  return rtn;
-} //end getHeuristic
+  Tile :: heur = rtn;
+} //end findHeur
 
 Tile :: Tile()
 {
@@ -67,5 +73,5 @@ Tile :: Tile(int x, int y)
   xLoc = x;
   yLoc = y;
   value = -1; //default value; is this done by the default constructor already?
-  heur = findHeur(x,y);
+  findHeur(x,y);
 } //end overloaded
