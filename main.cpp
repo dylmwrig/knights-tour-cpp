@@ -11,7 +11,8 @@
  save everything in an output file
  */
 
- #include "tile.h"
+#include "node.h"
+#include "tile.h"
 #include <iostream>
 
 //display the board (similar to in my final last semester)
@@ -22,17 +23,14 @@ void printBoard(Tile board[][8])
     std :: cout << "|";
     for (int j = 0; j < 8; j++)
     {
-      std :: cout << board[i][j].getHeur() << "|";
+      std :: cout << board[i][j].getValue() << "|";
     } //end for
-    std :: cout << "\n";
+    std :: cout << "\n"; //newline on new row
   } //end for
 } //end printBoard
 
 int main()
 {
-  //int fill [8] = {-1, -1, -1, -1, -1, -1, -1, -1};
-  //int board [8][8] = {fill, fill, fill, fill, fill, fill, fill, fill};
-
   Tile board [8][8];
 
   //I'm just doing this temporarily; I'm trying to figure out how to efficiently initialize a 2d array to one value
@@ -48,4 +46,9 @@ int main()
   } //end for
 
   printBoard(board);
+
+  Node root; //Node * root ??
+  std :: cout << "\n\nroot data " << root.getData();
+  int pass[2] = {1, 2};
+  //Node * second(root, pass);
 } //end main

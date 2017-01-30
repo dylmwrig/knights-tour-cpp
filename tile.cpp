@@ -28,10 +28,16 @@ int Tile :: getHeur()
 } //end getter
 
 //find the heuristic value given x and y coordinates
+//it does this by seeing if the coordinates are within a certain range
+//mostly checking for if they are at certain points on the edge of the board
+//which means there are less tiles possible to move to that tile from, giving it a greater value
+//the reason this is done through a series of consecutive if statements is so that the same
+//conditions which would iterate a tile within 2 tiles from the edge will also
+//iterate the tiles on the corners
 void Tile :: findHeur(int x, int y)
 {
   int rtn = 0;
-  heur = 0; //would this be done already?
+  heur = 0; //would this be done already
 
   if ((x < 2) || (x > 5))
   {
@@ -52,12 +58,6 @@ void Tile :: findHeur(int x, int y)
   {
     rtn++;
   } //end if
-/*
-  if ((x == 1) || (x == 6) || (y == 1) || (y == 6))
-  {
-    rtn++;
-  } //end if
-*/
 
   Tile :: heur = rtn;
 } //end findHeur
