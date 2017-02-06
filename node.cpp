@@ -5,10 +5,12 @@
 //set each value to null
 
 #include "node.h"
+#include <iostream> //used for testing, remove later
 //#include <cstddef> nullptr???
 
 Node :: Node()
 {
+  std :: cout << "default constructor\n";
   xLoc_ = 0;
   yLoc_ = 0;
   next_ = 0;
@@ -16,6 +18,8 @@ Node :: Node()
 
 Node :: Node(Node * next, int x, int y)
 {
+  std :: cout << "\nyoooo....\n";
+  std :: cout << "\ninside overloaded next, x, y " << next->getX() << " " << x << " " << y << "\n";
   Node :: xLoc_ = x;
   Node :: yLoc_ = y;
   Node :: next_ = next;

@@ -47,10 +47,12 @@ int main()
 
   printBoard(board);
 
+  Node * pointer;
   Node root; //Node * root ??
+  * pointer = root;
   std :: cout << "\n\nroot data " << root.getX();
   int x = 4;
   int y = 2;
-  Node second(root, x, y);
+  Node second (pointer, x, y);
   std :: cout << second.getX();
 } //end main
