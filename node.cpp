@@ -10,20 +10,27 @@
 
 Node :: Node()
 {
-  std :: cout << "default constructor\n";
   xLoc_ = 0;
   yLoc_ = 0;
   next_ = 0;
 } //end constructor
 
-Node :: Node(Node * next, int x, int y)
+Node :: Node(int x, int y)
 {
-  std :: cout << "\nyoooo....\n";
-  std :: cout << "\ninside overloaded next, x, y " << next->getX() << " " << x << " " << y << "\n";
   Node :: xLoc_ = x;
   Node :: yLoc_ = y;
-  Node :: next_ = next;
 } //end overloaded constructor
+
+Node :: ~Node()
+{
+
+} //end destructor
+
+//setter
+void Node :: setNext(Node * next)
+{
+  Node :: next_ = next;
+} //end setter
 
 //getters
 Node * Node :: getNext()

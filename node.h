@@ -12,9 +12,13 @@ class Node
     Node * next_; //pointer to next node
   public:
     Node(); //constructor
-    Node(Node * next, int x, int y); //overloaded
+    Node(int x, int y); //overloaded
+    ~Node(); //destructor
 
-  //getters
+    //setter
+    void setNext(Node * next);
+
+    //getters
     Node * getNext(); //return pointer to next node
     int getX(); //returns x location
     int getY(); //returns y location

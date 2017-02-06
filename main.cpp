@@ -47,12 +47,17 @@ int main()
 
   printBoard(board);
 
-  Node * pointer;
-  Node root; //Node * root ??
-  * pointer = root;
-  std :: cout << "\n\nroot data " << root.getX();
+  //Node * pointer = 0;
+  //Node root; //Node * root ??
+  //std :: cout << "\n\nroot data " << root.getX();
   int x = 4;
   int y = 2;
-  Node second (pointer, x, y);
-  std :: cout << second.getX();
+  Node * first = new Node (x, y);
+
+  x = 9;
+  y = 1;
+  Node * second = new Node(x, y);
+  first->setNext(second);
+
+  std :: cout << first->getNext()->getX();
 } //end main
