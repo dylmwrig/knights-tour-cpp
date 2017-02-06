@@ -48,7 +48,9 @@ int main()
   printBoard(board);
 
   Node root; //Node * root ??
-  std :: cout << "\n\nroot data " << root.getData();
-  int pass[2] = {1, 2};
-  //Node * second(root, pass);
+  std :: cout << "\n\nroot data " << root.getX();
+  int x = 4;
+  int y = 2;
+  Node second(root, x, y);
+  std :: cout << second.getX();
 } //end main
