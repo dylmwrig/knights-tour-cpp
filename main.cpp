@@ -50,7 +50,7 @@ int main()
   //Node * pointer = 0;
   //Node root; //Node * root ??
   //std :: cout << "\n\nroot data " << root.getX();
-  int x = 4;
+  int x = 0;
   int y = 2;
   Node * first = new Node (x, y);
 
@@ -60,4 +60,24 @@ int main()
   first->setNext(second);
 
   std :: cout << first->getNext()->getX();
+
+  Node * choice = first;
+
+  bool inputCheck = true;
+
+  while (inputCheck)
+  {
+    std :: cout << "Enter initial x and y positions, respectively.\n";
+    std :: cout << "When you are done entering inputs, enter a non number or a number out of range.\n";
+
+    
+  } //end while
+
+  //there are more choices as long as the node is not null
+  while (choice != 0)
+  {
+    std :: cout << "x and y " << choice->getX() << " " << choice->getY() << std :: endl;
+    choice = choice->getNext(); //set current node to next node
+  } //end while
+
 } //end main
