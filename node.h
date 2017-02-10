@@ -15,7 +15,9 @@ class Node
     Node(int x, int y); //overloaded
     ~Node(); //destructor
 
-    //setter
+    //setters
+    void setX(int x);
+    void setY(int y);
     void setNext(Node * next);
 
     //getters

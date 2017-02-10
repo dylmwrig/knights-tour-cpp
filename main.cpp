@@ -50,6 +50,8 @@ int main()
   //Node * pointer = 0;
   //Node root; //Node * root ??
   //std :: cout << "\n\nroot data " << root.getX();
+
+/*
   int x = 0;
   int y = 2;
   Node * first = new Node (x, y);
@@ -63,15 +65,71 @@ int main()
 
   Node * choice = first;
 
-  bool inputCheck = true;
+*/
 
+  bool inputCheck = true, firstTime = true; //firstTime checks if we need to set the node that's being
+  int xIn = 0, yIn = 0;
+
+  Node * head = new Node();
+  Node * choice = head;
+  //Node * head = choice; //store the head node
+  Node * prevChoice = new Node();
+
+  //take user input as long as two conditions are met, that the input is a number
+  //or if it is not within bounds
   while (inputCheck)
   {
     std :: cout << "Enter initial x and y positions, respectively.\n";
     std :: cout << "When you are done entering inputs, enter a non number or a number out of range.\n";
 
-    
+    std :: cin >> xIn >> yIn;
+
+    if (std :: cin.fail()) //if input cannot be stored as an int
+    {
+      inputCheck = false;
+      std :: cin.clear();
+    } //end if
+
+    else //this is a number
+    {
+      std :: cin.clear();
+
+      if (xIn < 0 || xIn > 7 || yIn < 0 || yIn > 7) //validate range
+      {
+        inputCheck = false;
+        break;
+      } //end if
+
+      std :: cout << "x and y " << xIn << " " << yIn << std :: endl;
+
+
+      if (!firstTime)
+      {
+        choice->setX(xIn);
+        choice->setY(yIn);
+        if (head->getNext() == 0)
+        {
+          head->setNext(choice);
+        } //end if
+
+        else
+        {
+          *prevChoice = *choice;
+          prevChoice->setNext(choice);
+        } //end else
+      } //end if
+
+      else
+      {
+        head->setX(xIn);
+        head->setY(yIn);
+        firstTime = false;
+      } //end else
+    } //end else
   } //end while
+
+  *choice = *head;
+  std :: cout << "choice = head x and y " << choice->getX() << " " << choice->getY() << std :: endl;
 
   //there are more choices as long as the node is not null
   while (choice != 0)
@@ -79,5 +137,4 @@ int main()
     std :: cout << "x and y " << choice->getX() << " " << choice->getY() << std :: endl;
     choice = choice->getNext(); //set current node to next node
   } //end while
-
 } //end main

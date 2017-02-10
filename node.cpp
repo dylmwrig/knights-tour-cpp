@@ -26,7 +26,17 @@ Node :: ~Node()
 
 } //end destructor
 
-//setter
+//setters
+void Node :: setX(int x)
+{
+  Node :: xLoc_ = x;
+} //end setter
+
+void Node :: setY(int y)
+{
+  Node :: yLoc_ = y;
+} //end setter
+
 void Node :: setNext(Node * next)
 {
   Node :: next_ = next;
