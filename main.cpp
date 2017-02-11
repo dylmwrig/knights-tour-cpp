@@ -71,21 +71,7 @@ int main()
   int xIn = 0, yIn = 0, loopCount = 0;
 
   Node * head = new Node();
-  //Node * head = choice; //store the head node
   Node * prevChoice = new Node();
-/*
-  choice.setX(2);
-  head.setNext(choice);
-  prevChoice.setX(8);
-  choice.setNext(prevChoice);
-  std :: cout << "BEFORE CHOICE IS CHANGED " << head.get->getX() << std :: endl;
-  choice.setX(3);
-  std :: cout << "AFTER " << head->getNext().getX();
-  prevChoice.setNext(choice);
-  std :: cout << head.getNext().getX() << std :: endl;
-  std :: cout << head.getNext().getNext().getX() << std :: endl;
-  std :: cout << head.getNext().getNext().getNext().getX();
-  */
 
   //take user input as long as two conditions are met, that the input is a number
   //or if it is not within bounds
@@ -114,15 +100,11 @@ int main()
 
       Node * choice = new Node();
 
-      std :: cout << "INSIDE INPUTCHECK\n";
-      std :: cout << "x and y " << xIn << " " << yIn << std :: endl;
-
       if (loopCount > 1)
       {
         choice->setX(xIn);
         choice->setY(yIn);
         prevChoice->setNext(choice);
-        std :: cout << "first if prev then next " << prevChoice->getX() << " " << prevChoice->getY() << " next " << prevChoice->getNext()->getX() << " " << prevChoice->getNext()->getX() << std :: endl;
         prevChoice = choice;
         /*
         if (head->getNext() == 0)
@@ -157,42 +139,12 @@ int main()
       } //end else
     } //end else
   } //end while
-/*
-  std :: cout << "head before choice assignment " << head->getX() << " " << choice->getY() << std :: endl;
-*/
-
-  std :: cout << "AFTER LOOP " << head->getX() << " " << head->getNext()->getX() << " " << head->getNext()->getNext()->getX() << std :: endl;
-
 
   Node * choice = head;
-  std :: cout << "choice = head x and y " << choice->getX() << " " << choice->getY() << std :: endl;
-
-  std :: cout << "YOU CAN HAVE IT " << choice->getNext()->getX() << std :: endl;
-
 
   //there are more choices as long as the node is not null
   while (choice != 0)
   {
-    std :: cout << "x and y " << choice->getX() << " " << choice->getY() << std :: endl;
     choice = choice->getNext(); //set current node to next node
   } //end while
-
-
-/*
-  Node * test = new Node();
-  Node * test2 = new Node(3,4);
-  test->setNext(test2);
-  std :: cout << test->getNext()->getX();
-  if (test->getNext() == 0)
-  {
-    std :: cout << "test next is null \n";
-  }
-  else if (test2->getNext() == 0)
-  {
-    std :: cout << "test2 next is null\n";
-  }
-  else{
-    std :: cout << "neither is null?";
-  }
-  */
 } //end main
