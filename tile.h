@@ -1,5 +1,5 @@
-//#ifndef "TILE_H"
-//#define "TILE_H"
+#ifndef TILE_H
+#define TILE_H
 
 class Tile
 {
@@ -26,4 +26,4 @@ class Tile
     Tile(int x, int y); //overloaded with x and y location
 
 }; //end Tile class
-//#endif
+#endif

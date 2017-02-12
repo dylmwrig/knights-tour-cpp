@@ -13,6 +13,7 @@
 
 #include "node.h"
 #include "tile.h"
+#include "stack.h"
 #include <iostream>
 
 //display the board (similar to in my final last semester)
@@ -47,32 +48,23 @@ int main()
 
   printBoard(board);
 
-  //Node * pointer = 0;
-  //Node root; //Node * root ??
-  //std :: cout << "\n\nroot data " << root.getX();
-
-/*
-  int x = 0;
-  int y = 2;
-  Node * first = new Node (x, y);
-
-  x = 9;
-  y = 1;
-  Node * second = new Node(x, y);
-  first->setNext(second);
-
-  std :: cout << first->getNext()->getX();
-
-  Node * choice = first;
-
-*/
-
   bool inputCheck = true; //firstTime checks if we need to set the node that's being
   int xIn = 0, yIn = 0, loopCount = 0;
 
   Node * head = new Node();
   Node * prevChoice = new Node();
 
+  head->setX(3);
+
+  Stack test;
+  std :: cout << "size before push " << test.getSize() << std :: endl;
+  test.push(head);
+  std :: cout << test.getTop()->getX();
+  std :: cout << "\nsize after push " << test.getSize() << std :: endl;
+  test.pop();
+  std :: cout << "\nsize after pop " << test.getSize() << std :: endl;
+  test.pop();
+/*
   //take user input as long as two conditions are met, that the input is a number
   //or if it is not within bounds
   while (inputCheck)
@@ -106,19 +98,6 @@ int main()
         choice->setY(yIn);
         prevChoice->setNext(choice);
         prevChoice = choice;
-        /*
-        if (head->getNext() == 0)
-        {
-          head->setNext(choice);
-        } //end if
-
-        else
-        {
-          *prevChoice = *choice;
-          prevChoice->setNext(choice);
-        } //end else
-        */
-
       } //end if
 
       else if (loopCount == 1)
@@ -147,4 +126,5 @@ int main()
   {
     choice = choice->getNext(); //set current node to next node
   } //end while
+*/
 } //end main

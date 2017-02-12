@@ -1,8 +1,8 @@
 //header for node
 //used by linked list for input
 
- //#ifndef "NODE_H"
-//#define "NODE_H"
+#ifndef KNIGHT_NODE_H
+#define KNIGHT_NODE_H
 
 class Node
 {
@@ -26,4 +26,4 @@ class Node
     int getY(); //returns y location
 }; //end Node class
 
-//#endif
+#endif
