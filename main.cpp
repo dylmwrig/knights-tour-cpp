@@ -24,7 +24,7 @@ void printBoard(Tile board[][8])
     std :: cout << "|";
     for (int j = 0; j < 8; j++)
     {
-      if (board[i][j].getRank() > -1 &&board[i][j].getRank() < 9)
+      if (board[i][j].getRank() > -1 &&board[i][j].getRank() < 10)
       {
         std :: cout << "0";
       } //end if
@@ -50,7 +50,8 @@ void tour(Tile board[][8], int x, int y)
 
   while (keepGoing)
   {
-    bestHeur = 0;
+    Node * choice = new Node();
+    bestHeur = -1;
     if (x > 1 && y > 0)
     {
       if (board[x - 2][y - 1].getRank() == -1 && board[x - 2][y - 1].getHeur() > bestHeur)
@@ -131,18 +132,36 @@ void tour(Tile board[][8], int x, int y)
       } //end if
     } //end if
 
-    if (bestHeur == 0)
+    //if the program tries to overwrite the same x and y location with an incremented value
+    //that means that it made a mistake and needs to backtrack
+    if (bestX == x && bestY == y)
     {
-      keepGoing = false;
+      history.pop();
+      x = history.getTop->getX();
+      y = history.getTop->getY();
+      count--;
     } //end if
 
-    std :: cout << "x and y before reassignment " << x << " " << y << std :: endl;
-    x = bestX;
-    y = bestY;
-    std :: cout << "x and y after reassignment " << x << " " << y << std :: endl;
-    board[bestX][bestY].setRank(count);
-    printBoard(board);
-    count++;
+    else if (bestHeur == -1) //otherwise, if there are no options, the tour is complete
+    {
+      keepGoing = false;
+    } //end else if
+
+    else //otherwise it is a good selection
+    {
+      std :: cout << "count before increment " << count << std :: endl;
+      std :: cout << "bestHeur " << bestHeur << std :: endl;
+      std :: cout << "x and y before reassignment " << x << " " << y << std :: endl;
+      x = bestX;
+      y = bestY;
+      choice->setX(x);
+      choice->setY(y);
+      history.push(choice);
+      std :: cout << "x and y after reassignment " << x << " " << y << std :: endl;
+      board[bestX][bestY].setRank(count);
+      printBoard(board);
+      count++;
+    } //end else
   } //end while
 
   std :: cout << "best x, best y, bestheur " << bestX << " " << bestY << " " << bestHeur << std :: endl;
