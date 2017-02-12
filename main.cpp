@@ -24,6 +24,11 @@ void printBoard(Tile board[][8])
     std :: cout << "|";
     for (int j = 0; j < 8; j++)
     {
+      if (board[i][j].getRank() > -1 &&board[i][j].getRank() < 9)
+      {
+        std :: cout << "0";
+      } //end if
+
       std :: cout << board[i][j].getRank() << "|";
     } //end for
     std :: cout << "\n"; //newline on new row
@@ -37,93 +42,116 @@ void printBoard(Tile board[][8])
 void tour(Tile board[][8], int x, int y)
 {
   Stack history;
+
   int bestX, bestY, bestHeur = 0; //holds loc of best move and best heur for comparisons
   int count = 1; //used to set the value of each tile replaced
-  if (x > 1 && y > 0)
-  {
-    if (board[x - 2][y - 1].getRank() == -1 && board[x - 2][y - 1].getHeur() > bestHeur)
-    {
-      bestX = (x - 2);
-      bestY = (y - 1);
-      bestHeur = board[x - 2][y - 1].getHeur();
-    } //end if
-  } //end if
 
-  if (x > 1 && y < 7)
-  {
-    if (board[x - 2][y + 1].getRank() == -1 && board[x - 2][y + 1].getHeur() > bestHeur)
-    {
-      bestX = (x - 2);
-      bestY = (y + 1);
-      bestHeur = board[x - 2][y + 1].getHeur();
-    } //end if
-  } //end if
+  bool keepGoing = true; //break loop when complete
 
-  if (x > 0 && y < 6)
+  while (keepGoing)
   {
-    if (board[x - 1][y + 2].getRank() == -1 && board[x - 1][y + 2].getHeur() > bestHeur)
+    bestHeur = 0;
+    if (x > 1 && y > 0)
     {
-      bestX = (x - 1);
-      bestY = (y + 2);
-      bestHeur = board[x - 1][y + 2].getHeur();
+      if (board[x - 2][y - 1].getRank() == -1 && board[x - 2][y - 1].getHeur() > bestHeur)
+      {
+        bestX = (x - 2);
+        bestY = (y - 1);
+        bestHeur = board[x - 2][y - 1].getHeur();
+      } //end if
     } //end if
-  } //end if
 
-  if (x < 7 && y < 6)
-  {
-    if (board[x + 1][y + 2].getRank() == -1 && board[x + 1][y + 2].getHeur() > bestHeur)
+    if (x > 1 && y < 7)
     {
-      bestX = (x + 1);
-      bestY = (y + 2);
-      bestHeur = board[x + 1][y + 2].getHeur();
+      if (board[x - 2][y + 1].getRank() == -1 && board[x - 2][y + 1].getHeur() > bestHeur)
+      {
+        bestX = (x - 2);
+        bestY = (y + 1);
+        bestHeur = board[x - 2][y + 1].getHeur();
+      } //end if
     } //end if
-  } //end if
 
-  if (x < 6 && y < 7)
-  {
-    if (board[x + 2][y + 1].getRank() == -1 && board[x + 2][y + 1].getHeur() > bestHeur)
+    if (x > 0 && y < 6)
     {
-      bestX = (x + 2);
-      bestY = (y + 1);
-      bestHeur = board[x + 2][y + 1].getHeur();
+      if (board[x - 1][y + 2].getRank() == -1 && board[x - 1][y + 2].getHeur() > bestHeur)
+      {
+        bestX = (x - 1);
+        bestY = (y + 2);
+        bestHeur = board[x - 1][y + 2].getHeur();
+      } //end if
     } //end if
-  } //end if
 
-  if (x < 6 && y > 0)
-  {
-    if (board[x + 2][y - 1].getRank() == -1 && board[x + 2][y - 1].getHeur() > bestHeur)
+    if (x < 7 && y < 6)
     {
-      bestX = (x + 2);
-      bestY = (y - 1);
-      bestHeur = board[x + 2][y - 1].getHeur();
+      if (board[x + 1][y + 2].getRank() == -1 && board[x + 1][y + 2].getHeur() > bestHeur)
+      {
+        bestX = (x + 1);
+        bestY = (y + 2);
+        bestHeur = board[x + 1][y + 2].getHeur();
+      } //end if
     } //end if
-  } //end if
 
-  if (x < 7 && y > 1)
-  {
-    if (board[x + 1][y - 2].getRank() == -1 && board[x + 1][y - 2].getHeur() > bestHeur)
+    if (x < 6 && y < 7)
     {
-      bestX = (x + 1);
-      bestY = (y - 2);
-      bestHeur = board[x + 1][y - 2].getHeur();
+      if (board[x + 2][y + 1].getRank() == -1 && board[x + 2][y + 1].getHeur() > bestHeur)
+      {
+        bestX = (x + 2);
+        bestY = (y + 1);
+        bestHeur = board[x + 2][y + 1].getHeur();
+      } //end if
     } //end if
-  } //end if
 
-  if (x > 0 && y > 1)
-  {
-    if (board[x - 1][y - 2].getRank() == -1 && board[x - 1][y - 2].getHeur() > bestHeur)
+    if (x < 6 && y > 0)
     {
-      bestX = (x - 1);
-      bestY = (y - 2);
-      bestHeur = board[x - 1][y - 2].getHeur();
+      if (board[x + 2][y - 1].getRank() == -1 && board[x + 2][y - 1].getHeur() > bestHeur)
+      {
+        bestX = (x + 2);
+        bestY = (y - 1);
+        bestHeur = board[x + 2][y - 1].getHeur();
+      } //end if
     } //end if
-  } //end if
+
+    if (x < 7 && y > 1)
+    {
+      if (board[x + 1][y - 2].getRank() == -1 && board[x + 1][y - 2].getHeur() > bestHeur)
+      {
+        bestX = (x + 1);
+        bestY = (y - 2);
+        bestHeur = board[x + 1][y - 2].getHeur();
+      } //end if
+    } //end if
+
+    if (x > 0 && y > 1)
+    {
+      if (board[x - 1][y - 2].getRank() == -1 && board[x - 1][y - 2].getHeur() > bestHeur)
+      {
+        bestX = (x - 1);
+        bestY = (y - 2);
+        bestHeur = board[x - 1][y - 2].getHeur();
+      } //end if
+    } //end if
+
+    if (bestHeur == 0)
+    {
+      keepGoing = false;
+    } //end if
+
+    std :: cout << "x and y before reassignment " << x << " " << y << std :: endl;
+    x = bestX;
+    y = bestY;
+    std :: cout << "x and y after reassignment " << x << " " << y << std :: endl;
+    board[bestX][bestY].setRank(count);
+    printBoard(board);
+    count++;
+  } //end while
 
   std :: cout << "best x, best y, bestheur " << bestX << " " << bestY << " " << bestHeur << std :: endl;
+  printBoard(board);
 }
 
 int main()
 {
+
   Tile board [8][8];
 
   //I'm just doing this temporarily; I'm trying to figure out how to efficiently initialize a 2d array to one value
