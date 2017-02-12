@@ -4,10 +4,10 @@
 class Tile
 {
   private:
-    int yLoc; //y location of tile
-    int xLoc; //x location of tile
-    int value; //number value of the tile
-    int heur; //heuristic value of the tile
+    int yLoc_; //y location of tile
+    int xLoc_; //x location of tile
+    int rank_; //number value of the tile
+    int heur_; //heuristic value of the tile
 
   public:
     void findHeur(int x, int y); //computes heuristic value
@@ -15,10 +15,10 @@ class Tile
     //setters
     void setYLoc(int y);
     void setXLoc(int x);
-    void setValue(int value);
+    void setRank(int rank);
 
     //getters
-    int getValue();
+    int getRank();
     int getHeur();
 
     //constructors

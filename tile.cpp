@@ -3,28 +3,28 @@
 //setters
 void Tile :: setYLoc(int y)
 {
-  Tile :: yLoc = y;
+  Tile :: yLoc_ = y;
 } //end setter
 
 void Tile :: setXLoc(int x)
 {
-  Tile :: xLoc = x;
+  Tile :: xLoc_ = x;
 } //end setter
 
-void Tile :: setValue(int val)
+void Tile :: setRank(int rank)
 {
-  Tile :: value = val;
+  Tile :: rank_ = rank;
 } //end setter
 
 //getters
-int Tile :: getValue()
+int Tile :: getRank()
 {
-  return value;
+  return rank_;
 } //end getter
 
 int Tile :: getHeur()
 {
-  return heur;
+  return heur_;
 } //end getter
 
 //find the heuristic value given x and y coordinates
@@ -37,7 +37,7 @@ int Tile :: getHeur()
 void Tile :: findHeur(int x, int y)
 {
   int rtn = 0;
-  heur = 0; //would this be done already
+  heur_ = 0; //would this be done already
 
   if ((x < 2) || (x > 5))
   {
@@ -59,19 +59,19 @@ void Tile :: findHeur(int x, int y)
     rtn++;
   } //end if
 
-  Tile :: heur = rtn;
+  Tile :: heur_ = rtn;
 } //end findHeur
 
 Tile :: Tile()
 {
-  heur = 0;
-  value = -1;
+  heur_ = 0;
+  rank_ = -1;
 } //end constructor
 
 Tile :: Tile(int x, int y)
 {
-  xLoc = x;
-  yLoc = y;
-  value = -1; //default value; is this done by the default constructor already?
+  xLoc_ = x;
+  yLoc_ = y;
+  rank_ = -1; //default value; is this done by the default constructor already?
   findHeur(x,y);
 } //end overloaded
