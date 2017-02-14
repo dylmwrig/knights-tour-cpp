@@ -13,6 +13,7 @@ Node :: Node()
   xLoc_ = 0;
   yLoc_ = 0;
   next_ = 0;
+  pathNum_ = 0;
 } //end constructor
 
 Node :: Node(int x, int y)
@@ -42,6 +43,11 @@ void Node :: setNext(Node * next)
   Node :: next_ = next;
 } //end setter
 
+void Node :: setPathNum(int pathNum)
+{
+  Node :: pathNum_ = pathNum;
+} //end setter
+
 //getters
 Node * Node :: getNext()
 {
@@ -56,4 +62,9 @@ int Node :: getX()
 int Node :: getY()
 {
   return yLoc_;
-}
+} //end getter
+
+int Node :: getPathNum();
+{
+    return pathNum_;
+} //end getter

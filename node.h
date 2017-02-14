@@ -9,7 +9,7 @@ class Node
   private:
     int xLoc_; //holds x location
     int yLoc_; //holds y location
-    int pathID_; //holds identifier for traversing the different options
+    int pathNum_; //holds number for path to check for backtracking on stack
     Node * next_; //pointer to next node
   public:
     Node(); //constructor
@@ -19,14 +19,14 @@ class Node
     //setters
     void setX(int x);
     void setY(int y);
-    void setPathID(int pathNum);
+    void setPathNum(int pathNum);
     void setNext(Node * next);
 
     //getters
     Node * getNext(); //return pointer to next node
     int getX(); //returns x location
     int getY(); //returns y location
-    int getPathID();
+    int getPathNum();
 }; //end Node class
 
 #endif

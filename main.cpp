@@ -45,16 +45,40 @@ void tour(Tile board[][8], int x, int y)
 
   int bestX, bestY, bestHeur = 0; //holds loc of best move and best heur for comparisons
   int count = 1; //used to set the value of each tile replaced
+  int pathNum = 0; //used for backtracking
 
   bool keepGoing = true; //break loop when complete
+  bool heurCheck = true; //only check heuristics for the first half
+
+  Node * choice = new Node(); //hold the base "choice" node from which each move option will be exhausted
 
   while (keepGoing)
   {
-    Node * choice = new Node();
+    //the next two will need to be created on each run through so create them within the loop
+    Node options[8]; //there can be no more than 8 move options
+    Node * option = new Node(); //store the possible move, goes in "options" array
+    int optCount = 0; //holds index of array
+
     bestHeur = -1;
-    if (x > 1 && y > 0)
+    pathNum =
+
+    //basic checks which need to be done to check every direction
+    //only check heuristic values if we're in the first half of the program
+    //if we're not checking heuristics, store the value right away (as we're being exhaustive)
+    //first thing to do is check if the tile is even within range
+    //simultaneously check if the tile has not been moved to already (marked with a -1)
+    if (x > 1 && y > 0 && board[x - 2][y - 1].getRank() == -1 )
     {
-      if (board[x - 2][y - 1].getRank() == -1 && board[x - 2][y - 1].getHeur() > bestHeur)
+      option->setX(x - 2);
+      option->setY(y - 1);
+      options[]
+
+      if (heurCheck)
+      {
+
+      } //end if
+
+      if (board[x - 2][y - 1].getHeur() > bestHeur)
       {
         bestX = (x - 2);
         bestY = (y - 1);
