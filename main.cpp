@@ -35,6 +35,30 @@ void printBoard(Tile board[][8])
   } //end for
 } //end printBoard
 
+//sort the options
+//no need to return anything, as the array values will be changed directly
+//TODO
+//I'm going to start this as a bubble sort because it's easy to implement but will change it
+//if I have time
+void sort(Tile board[][8], Node options[8], int optNum)
+{
+  int heur1, heur2;
+  for (int i = 0; i < optNum; i++)
+  {
+    for (int j = 0; j < optNum; j++)
+    {
+      heur1 = board[i][j].getHeur();
+      heur2 = board[i][j].getHeur();
+      if (heur1 > heur2)
+      {
+        Node temp = options[i];
+        options[i] = options[j];
+        options[j] = temp;
+      } //end if
+    } //end fo
+  } //end for
+} //end sort
+
 //knight's tour
 //pass in initial x and y location for the knight to start at
 //use stack data structure to hold move history
@@ -60,7 +84,7 @@ void tour(Tile board[][8], int x, int y)
     int optCount = 0; //holds index of array
 
     bestHeur = -1;
-    pathNum =
+    pathNum = choice->getPathNum();
 
     //basic checks which need to be done to check every direction
     //only check heuristic values if we're in the first half of the program
@@ -71,8 +95,11 @@ void tour(Tile board[][8], int x, int y)
     {
       option->setX(x - 2);
       option->setY(y - 1);
-      options[]
+      options[optCount] = *option;
+      optCount++;
+      option = new Node();
 
+      /*
       if (heurCheck)
       {
 
@@ -84,86 +111,174 @@ void tour(Tile board[][8], int x, int y)
         bestY = (y - 1);
         bestHeur = board[x - 2][y - 1].getHeur();
       } //end if
+
+      */
     } //end if
 
-    if (x > 1 && y < 7)
+    if (x > 1 && y < 7 && board[x - 2][y + 1].getRank() == -1)
     {
-      if (board[x - 2][y + 1].getRank() == -1 && board[x - 2][y + 1].getHeur() > bestHeur)
+      option->setX(x - 2);
+      option->setY(y + 1);
+      options[optCount] = *option;
+      optCount++;
+      option = new Node();
+
+      /*
+      if ( && board[x - 2][y + 1].getHeur() > bestHeur)
       {
         bestX = (x - 2);
         bestY = (y + 1);
         bestHeur = board[x - 2][y + 1].getHeur();
       } //end if
+      */
     } //end if
 
-    if (x > 0 && y < 6)
+    if (x > 0 && y < 6 && board[x - 1][y + 2].getRank() == -1)
     {
+        option->setX(x - 1);
+        option->setY(y + 2);
+        options[optCount] = *option;
+        optCount++;
+        option = new Node();
+/*
       if (board[x - 1][y + 2].getRank() == -1 && board[x - 1][y + 2].getHeur() > bestHeur)
       {
         bestX = (x - 1);
         bestY = (y + 2);
         bestHeur = board[x - 1][y + 2].getHeur();
       } //end if
+*/
     } //end if
 
-    if (x < 7 && y < 6)
+    if (x < 7 && y < 6 && board[x + 1][y + 2].getRank() == -1)
     {
+      option->setX(x + 1);
+      option->setY(y + 2);
+      options[optCount] = *option;
+      optCount++;
+      option = new Node();
+/*
       if (board[x + 1][y + 2].getRank() == -1 && board[x + 1][y + 2].getHeur() > bestHeur)
       {
         bestX = (x + 1);
         bestY = (y + 2);
         bestHeur = board[x + 1][y + 2].getHeur();
       } //end if
+*/
     } //end if
 
-    if (x < 6 && y < 7)
+    if (x < 6 && y < 7 && board[x + 2][y + 1].getRank() == -1)
     {
+      option->setX(x + 2);
+      option->setY(y + 1);
+      options[optCount] = *option;
+      optCount++;
+      option = new Node();
+      /*
       if (board[x + 2][y + 1].getRank() == -1 && board[x + 2][y + 1].getHeur() > bestHeur)
       {
         bestX = (x + 2);
         bestY = (y + 1);
         bestHeur = board[x + 2][y + 1].getHeur();
       } //end if
+*/
     } //end if
 
-    if (x < 6 && y > 0)
+    if (x < 6 && y > 0 && board[x + 2][y - 1].getRank() == -1)
     {
+      option->setX(x + 2);
+      option->setY(y - 1);
+      options[optCount] = *option;
+      optCount++;
+      option = new Node();
+
+/*
       if (board[x + 2][y - 1].getRank() == -1 && board[x + 2][y - 1].getHeur() > bestHeur)
       {
         bestX = (x + 2);
         bestY = (y - 1);
         bestHeur = board[x + 2][y - 1].getHeur();
       } //end if
+      */
     } //end if
 
-    if (x < 7 && y > 1)
+    if (x < 7 && y > 1 && board[x + 1][y - 2].getRank() == -1)
     {
+      option->setX(x + 1);
+      option->setY(y - 2);
+      options[optCount] = *option;
+      optCount++;
+      option = new Node();
+      /*
       if (board[x + 1][y - 2].getRank() == -1 && board[x + 1][y - 2].getHeur() > bestHeur)
       {
         bestX = (x + 1);
         bestY = (y - 2);
         bestHeur = board[x + 1][y - 2].getHeur();
       } //end if
+*/
     } //end if
 
-    if (x > 0 && y > 1)
+    if (x > 0 && y > 1 && board[x - 1][y - 2].getRank() == -1)
     {
+      option->setX(x - 1);
+      option->setY(y - 2);
+      options[optCount] = *option;
+      optCount++;
+      option = new Node();
+      /*
       if (board[x - 1][y - 2].getRank() == -1 && board[x - 1][y - 2].getHeur() > bestHeur)
       {
         bestX = (x - 1);
         bestY = (y - 2);
         bestHeur = board[x - 1][y - 2].getHeur();
       } //end if
+*/
     } //end if
+
+    //the array only needs to be sorted if we're taking the heuristic value into consideration
+    if (heurCheck)
+    {
+      sort(board, options, optCount);
+    } //end if
+
+    for (int i = 0; i < optCount; i++)
+    {
+      int x = options[i].getX();
+      int y = options[i].getY();
+      int heur = board[x][y].getHeur();
+      std :: cout << "x, y, heuristic: " << x << " " << y << " " << heur << std :: endl;
+    }
+
+    bestX = options[pathNum].getX();
+    bestY = options[pathNum].getY();
+    bestHeur = board[bestX][bestY].getHeur();
 
     //if the program tries to overwrite the same x and y location with an incremented value
     //that means that it made a mistake and needs to backtrack
     if (bestX == x && bestY == y)
     {
-      history.pop();
-      x = history.getTop->getX();
-      y = history.getTop->getY();
-      count--;
+      //if every option has been checked for this node, this path has been exhausted
+      //so go up a level using pop() and decrement accordingly, resetting the tile's rank
+      //set the pathNum to += 1 so that the program no longer checks this route
+
+      if (pathNum == optCount)
+      {
+        history.pop();
+        board[x][y].setRank(-1); //the tile is now "unvisited"
+        history.getTop()->setPathNum(history.getTop()->getPathNum() + 1);
+        choice = history.getTop();
+        x = history.getTop()->getX();
+        y = history.getTop()->getY();
+        count--; //go down one as there are now less
+      } //end if
+
+      //otherwise there are still some options we need to check
+      else
+      {
+        pathNum++;
+      } //end else
+
     } //end if
 
     else if (bestHeur == -1) //otherwise, if there are no options, the tour is complete

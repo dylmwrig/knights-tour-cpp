@@ -64,7 +64,7 @@ int Node :: getY()
   return yLoc_;
 } //end getter
 
-int Node :: getPathNum();
+int Node :: getPathNum()
 {
     return pathNum_;
 } //end getter
