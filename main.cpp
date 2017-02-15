@@ -194,9 +194,17 @@ void tour(Tile board[][8], int x, int y)
     bestY = options[pathNum].getY();
     bestHeur = board[bestX][bestY].getHeur();
 
+    //check if the tour is over
+    //TODO """iffy""" about this conditional ;)))
+    if (history.getSize() == 64) //&& bestHeur == -1 //if 64 positions have been filled and
+    {
+      std :: cout << "bestHeur == -1, x and y " << x << " " << y << std :: endl;
+      keepGoing = false;
+    } //end if
+
     //if the program tries to overwrite the same x and y location with an incremented value
     //that means that it made a mistake and needs to backtrack
-    if ((bestX == x && bestY == y) || pathNum >= optCount)
+    else if ((bestX == x && bestY == y) || pathNum >= optCount)
     {
       //if every option has been checked for this node, this path has been exhausted
       //so go up a level using pop() and decrement accordingly, resetting the tile's rank
@@ -229,12 +237,6 @@ void tour(Tile board[][8], int x, int y)
         choice->setPathNum(choice->getPathNum() + 1);
         //pathNum++;
       } //end else
-    } //end if
-
-    else if (bestHeur == -1) //otherwise, if there are no options, the tour is complete
-    {
-      std :: cout << "bestHeur == -1, x and y " << x << " " << y << std :: endl;
-      keepGoing = false;
     } //end else if
 
     else //otherwise it is a good selection
@@ -244,15 +246,17 @@ void tour(Tile board[][8], int x, int y)
       std :: cout << "x and y before reassignment " << x << " " << y << std :: endl;
       x = bestX;
       y = bestY;
+      choice = new Node();
       choice->setX(x);
       choice->setY(y);
       history.push(choice);
       std :: cout << "\n\n\nSTACK AFTER PUSH: " << history.getSize() << std :: endl;
       std :: cout << "x and y after reassignment " << x << " " << y << std :: endl;
       board[bestX][bestY].setRank(count);
-      printBoard(board);
+      //printBoard(board);
       count++;
     } //end else
+    printBoard(board);
   } //end while
 
   std :: cout << "best x, best y, bestheur " << bestX << " " << bestY << " " << bestHeur << std :: endl;
@@ -284,7 +288,8 @@ int main()
   Node * head = new Node();
   Node * prevChoice = new Node();
 
-  tour(board, 1, 2);
+  //tour(board, 1, 2);
+  tour(board, 3, 6);
 /*
   //take user input as long as two conditions are met, that the input is a number
   //or if it is not within bounds
