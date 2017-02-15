@@ -89,7 +89,7 @@ void tour(Tile board[][8], int x, int y)
   {
     //the next two will need to be created on each run through so create them within the loop
     Node options[8]; //there can be no more than 8 move options
-    Node * option = new Node(); //store the possible move, goes in "options" array
+    Node option; //store the possible move, goes in "options" array
     int optCount = 0; //holds index of array
 
     bestHeur = -1;
@@ -104,147 +104,66 @@ void tour(Tile board[][8], int x, int y)
     //simultaneously check if the tile has not been moved to already (marked with a -1)
     if (x > 1 && y > 0 && board[x - 2][y - 1].getRank() == -1 )
     {
-      option->setX(x - 2);
-      option->setY(y - 1);
-      options[optCount] = *option;
+      option.setX(x - 2);
+      option.setY(y - 1);
+      options[optCount] = option;
       optCount++;
-      option = new Node();
-
-      /*
-      if (heurCheck)
-      {
-
-      } //end if
-
-      if (board[x - 2][y - 1].getHeur() > bestHeur)
-      {
-        bestX = (x - 2);
-        bestY = (y - 1);
-        bestHeur = board[x - 2][y - 1].getHeur();
-      } //end if
-
-      */
     } //end if
 
     if (x > 1 && y < 7 && board[x - 2][y + 1].getRank() == -1)
     {
-      option->setX(x - 2);
-      option->setY(y + 1);
-      options[optCount] = *option;
+      option.setX(x - 2);
+      option.setY(y + 1);
+      options[optCount] = option;
       optCount++;
-      option = new Node();
-
-      /*
-      if ( && board[x - 2][y + 1].getHeur() > bestHeur)
-      {
-        bestX = (x - 2);
-        bestY = (y + 1);
-        bestHeur = board[x - 2][y + 1].getHeur();
-      } //end if
-      */
     } //end if
 
     if (x > 0 && y < 6 && board[x - 1][y + 2].getRank() == -1)
     {
-        option->setX(x - 1);
-        option->setY(y + 2);
-        options[optCount] = *option;
+        option.setX(x - 1);
+        option.setY(y + 2);
+        options[optCount] = option;
         optCount++;
-        option = new Node();
-/*
-      if (board[x - 1][y + 2].getRank() == -1 && board[x - 1][y + 2].getHeur() > bestHeur)
-      {
-        bestX = (x - 1);
-        bestY = (y + 2);
-        bestHeur = board[x - 1][y + 2].getHeur();
-      } //end if
-*/
     } //end if
 
     if (x < 7 && y < 6 && board[x + 1][y + 2].getRank() == -1)
     {
-      option->setX(x + 1);
-      option->setY(y + 2);
-      options[optCount] = *option;
+      option.setX(x + 1);
+      option.setY(y + 2);
+      options[optCount] = option;
       optCount++;
-      option = new Node();
-/*
-      if (board[x + 1][y + 2].getRank() == -1 && board[x + 1][y + 2].getHeur() > bestHeur)
-      {
-        bestX = (x + 1);
-        bestY = (y + 2);
-        bestHeur = board[x + 1][y + 2].getHeur();
-      } //end if
-*/
     } //end if
 
     if (x < 6 && y < 7 && board[x + 2][y + 1].getRank() == -1)
     {
-      option->setX(x + 2);
-      option->setY(y + 1);
-      options[optCount] = *option;
+      option.setX(x + 2);
+      option.setY(y + 1);
+      options[optCount] = option;
       optCount++;
-      option = new Node();
-      /*
-      if (board[x + 2][y + 1].getRank() == -1 && board[x + 2][y + 1].getHeur() > bestHeur)
-      {
-        bestX = (x + 2);
-        bestY = (y + 1);
-        bestHeur = board[x + 2][y + 1].getHeur();
-      } //end if
-*/
     } //end if
 
     if (x < 6 && y > 0 && board[x + 2][y - 1].getRank() == -1)
     {
-      option->setX(x + 2);
-      option->setY(y - 1);
-      options[optCount] = *option;
+      option.setX(x + 2);
+      option.setY(y - 1);
+      options[optCount] = option;
       optCount++;
-      option = new Node();
-
-/*
-      if (board[x + 2][y - 1].getRank() == -1 && board[x + 2][y - 1].getHeur() > bestHeur)
-      {
-        bestX = (x + 2);
-        bestY = (y - 1);
-        bestHeur = board[x + 2][y - 1].getHeur();
-      } //end if
-      */
     } //end if
 
     if (x < 7 && y > 1 && board[x + 1][y - 2].getRank() == -1)
     {
-      option->setX(x + 1);
-      option->setY(y - 2);
-      options[optCount] = *option;
+      option.setX(x + 1);
+      option.setY(y - 2);
+      options[optCount] = option;
       optCount++;
-      option = new Node();
-      /*
-      if (board[x + 1][y - 2].getRank() == -1 && board[x + 1][y - 2].getHeur() > bestHeur)
-      {
-        bestX = (x + 1);
-        bestY = (y - 2);
-        bestHeur = board[x + 1][y - 2].getHeur();
-      } //end if
-*/
     } //end if
 
     if (x > 0 && y > 1 && board[x - 1][y - 2].getRank() == -1)
     {
-      option->setX(x - 1);
-      option->setY(y - 2);
-      options[optCount] = *option;
+      option.setX(x - 1);
+      option.setY(y - 2);
+      options[optCount] = option;
       optCount++;
-      option = new Node();
-      /*
-      if (board[x - 1][y - 2].getRank() == -1 && board[x - 1][y - 2].getHeur() > bestHeur)
-      {
-        bestX = (x - 1);
-        bestY = (y - 2);
-        bestHeur = board[x - 1][y - 2].getHeur();
-      } //end if
-*/
     } //end if
 
     if (optCount == 0)
