@@ -42,21 +42,30 @@ void printBoard(Tile board[][8])
 //if I have time
 void sort(Tile board[][8], Node options[8], int optNum)
 {
-  int heur1, heur2;
+  int heur1, heur2, x1, x2, y1, y2;
   for (int i = 0; i < optNum; i++)
   {
+    x1 = options[i].getX();
+    y1 = options[i].getY();
+    heur1 = board[x1][y1].getHeur();
     for (int j = 0; j < optNum; j++)
     {
-      heur1 = board[i][j].getHeur();
-      heur2 = board[i][j].getHeur();
+      x2 = options[j].getX();
+      y2 = options[j].getY();
+      heur2 = board[x2][y2].getHeur();
       if (heur1 > heur2)
       {
         Node temp = options[i];
         options[i] = options[j];
         options[j] = temp;
       } //end if
-    } //end fo
+    } //end for
   } //end for
+
+  for (int i = 0; i < optNum; i++)
+  {
+    std :: cout << "In sort, x y and heur " << options[i].getX() << " " << options[i].getY() << " " << board[options[i].getX()][options[i].getY()].getHeur() << std :: endl;
+  }
 } //end sort
 
 //knight's tour
@@ -85,6 +94,8 @@ void tour(Tile board[][8], int x, int y)
 
     bestHeur = -1;
     pathNum = choice->getPathNum();
+
+    std :: cout << "START OF LOOP pathNum " << pathNum << std :: endl;
 
     //basic checks which need to be done to check every direction
     //only check heuristic values if we're in the first half of the program
@@ -236,6 +247,13 @@ void tour(Tile board[][8], int x, int y)
 */
     } //end if
 
+    if (optCount == 0)
+    {
+      std :: cout << "\n\n\n\n\nOPTCOUNT IS ZERO\n\n\n\n";
+    }
+
+    std :: cout << "\n\nAFTER CONDITIONAL HELL, optCount and pathNum " << optCount << " " << pathNum << std :: endl;
+
     //the array only needs to be sorted if we're taking the heuristic value into consideration
     if (heurCheck)
     {
@@ -256,33 +274,43 @@ void tour(Tile board[][8], int x, int y)
 
     //if the program tries to overwrite the same x and y location with an incremented value
     //that means that it made a mistake and needs to backtrack
-    if (bestX == x && bestY == y)
+    if ((bestX == x && bestY == y) || optCount == 0 || pathNum >= optCount)
     {
       //if every option has been checked for this node, this path has been exhausted
       //so go up a level using pop() and decrement accordingly, resetting the tile's rank
       //set the pathNum to += 1 so that the program no longer checks this route
-
-      if (pathNum == optCount)
+      std :: cout << "best values are equal to regular values " << x << " " << y << std :: endl;
+      if (pathNum >= optCount || optCount == 0)
       {
+        std :: cout << "pathnum and optCount " << pathNum << " " << optCount << std :: endl;
         history.pop();
-        board[x][y].setRank(-1); //the tile is now "unvisited"
+        std :: cout << "\n\n\nSTACK AFTER POP " << history.getSize() << std :: endl;
+        board[x][y].setRank(-1); //the tile is now "unvisited"kd
         history.getTop()->setPathNum(history.getTop()->getPathNum() + 1);
         choice = history.getTop();
-        x = history.getTop()->getX();
-        y = history.getTop()->getY();
+        x = choice->getX();
+        y = choice->getY();
+        std :: cout << "NEW X AND Y AFTER POP " << x << " " << y << std :: endl;
         count--; //go down one as there are now less
       } //end if
 
+/*
+      else if (optCount == 0)
+      {
+
+      }
+*/
       //otherwise there are still some options we need to check
       else
       {
+        std :: cout << "pathNum != optCount so incrementing, before increment " << pathNum << std :: endl;
         pathNum++;
       } //end else
-
     } //end if
 
     else if (bestHeur == -1) //otherwise, if there are no options, the tour is complete
     {
+      std :: cout << "bestHeur == -1, x and y " << x << " " << y << std :: endl;
       keepGoing = false;
     } //end else if
 
@@ -296,6 +324,7 @@ void tour(Tile board[][8], int x, int y)
       choice->setX(x);
       choice->setY(y);
       history.push(choice);
+      std :: cout << "\n\n\nSTACK AFTER PUSH: " << history.getSize() << std :: endl;
       std :: cout << "x and y after reassignment " << x << " " << y << std :: endl;
       board[bestX][bestY].setRank(count);
       printBoard(board);
@@ -305,7 +334,7 @@ void tour(Tile board[][8], int x, int y)
 
   std :: cout << "best x, best y, bestheur " << bestX << " " << bestY << " " << bestHeur << std :: endl;
   printBoard(board);
-}
+} //end tour
 
 int main()
 {
