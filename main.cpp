@@ -179,6 +179,7 @@ void tour(Tile board[][8], int x, int y)
       sort(board, options, optCount);
     } //end if
 
+    std :: cout << "CHECKING IF LIST IS THE SAME EVERY TIME: original x, y and then list: " << x << " " << y << std :: endl;
     for (int i = 0; i < optCount; i++)
     {
       int x = options[i].getX();
@@ -187,19 +188,21 @@ void tour(Tile board[][8], int x, int y)
       std :: cout << "x, y, heuristic: " << x << " " << y << " " << heur << std :: endl;
     }
 
+    std :: cout << "\nOPTCOUNT TEST options x and y at optcount " << options[optCount].getX() << " " << options[optCount].getY() << std :: endl;
+
     bestX = options[pathNum].getX();
     bestY = options[pathNum].getY();
     bestHeur = board[bestX][bestY].getHeur();
 
     //if the program tries to overwrite the same x and y location with an incremented value
     //that means that it made a mistake and needs to backtrack
-    if ((bestX == x && bestY == y) || optCount == 0 || pathNum >= optCount)
+    if ((bestX == x && bestY == y) || pathNum >= optCount)
     {
       //if every option has been checked for this node, this path has been exhausted
       //so go up a level using pop() and decrement accordingly, resetting the tile's rank
       //set the pathNum to += 1 so that the program no longer checks this route
       std :: cout << "best values are equal to regular values " << x << " " << y << std :: endl;
-      if (pathNum >= optCount || optCount == 0)
+      if (pathNum >= optCount)
       {
         std :: cout << "pathnum and optCount " << pathNum << " " << optCount << std :: endl;
         history.pop();
@@ -223,7 +226,8 @@ void tour(Tile board[][8], int x, int y)
       else
       {
         std :: cout << "pathNum != optCount so incrementing, before increment " << pathNum << std :: endl;
-        pathNum++;
+        choice->setPathNum(choice->getPathNum() + 1);
+        //pathNum++;
       } //end else
     } //end if
 
